@@ -1,3 +1,4 @@
+;Need ejemplosB2.scm
 ;Construya la función anadir-ejemplo que tenga como parámetros
 ;una lista de ejemplos y un nuevo ejemplo. Esta función debe añadir el ejemplo
 ;nuevo a la lista de ejemplos.
