@@ -33,6 +33,24 @@ Salida: '(6 1.75 +)
 (define ejemplos null)
 (define output null)
 
+(define (traducir meta-atributo valor)
+  (let ([traduccion null])
+    (cond [(number? valor)
+         (set! traduccion valor)
+         ]
+        [else
+         (for ([i (length (car (cdr meta-atributo)))])
+           (cond [(equal? valor (list-ref (car (cdr meta-atributo)) i))
+                  (set! traduccion i)
+                  ]
+                 )
+           )
+         ]
+        )
+  traduccion
+    )
+  )
+
 (define (dot-product l r)
   (for/sum ([x l] [y r]) (* x y))
   )
@@ -46,9 +64,16 @@ Salida: '(6 1.75 +)
 
 
 (define (match-LUU [concepto-UU empty][ejemplo-sin-clase empty])
-  (let ([result empty])
+  
+  (let ([result empty]
+        [vector-LUU empty]
+        [aux empty])
+    (for ([j (car concepto-UU)][k (car(cdr concepto-UU))])
+      (set! aux (traducir j k))
+      (set! vector-LUU (append vector-LUU (list aux)))
+      )
     (set! ejemplo-sin-clase(append ejemplo-sin-clase '(1)))
-    (set! result (dot-product (car(cdr concepto-UU)) ejemplo-sin-clase))
+    (set! result (dot-product vector-LUU ejemplo-sin-clase))
       (cond
         [(positive? result) (set! output #t)]
         [else (set! output #f)]
